@@ -3,7 +3,16 @@
 function showDogImgs(val){
    fetch(`https://dog.ceo/api/breeds/image/random/${val}`)
    .then(response => response.json())
-   .then(responseJson => console.log(responseJson)); 
+   .then(responseJson => showResponse(responseJson)); 
+}
+
+function showResponse(responseJson){
+    let imgArr = responseJson.message;
+    for (let i = 0 ; i < imgArr.length; i ++){
+        let img = imgArr[i];
+        console.log(img);
+        $('.imagesContainer').append(`<img src='${img}'>`);
+    }
 }
 
 function handleFormSubmition(){
