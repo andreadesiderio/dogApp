@@ -6,27 +6,39 @@
     <title>Dog App</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
-    
+    <style>
+      img{
+        width: 200px; height: 200px;
+      }
+     form{
+       border: 1px solid black;
+       margin: 10px;
+       padding: 10px;
+     } 
+    </style>
 </head>
 <body>
  <h1>Dog App</h1>
- <form>
+ <form id='multipleImgs'>
   <legend>How many dog pictures do you want?</legend>
   <label for="numberOfDogPics">Choose up to 50</label>
   <input type="number" name="numberOfDogPics" required placeholder="3" min="1" max="50">
   <button>Sumbmit</button>
  </form>
 
-<div class="imagesContainer">
-    
-</div>
+<div class="imagesContainer"></div>
+
+<form id="singleImg">
+  <legend>Choose a breed</legend>
+  <label for='breedChoice'>Breed:</label>
+  <input type="text" placeholder="lab"  required id="breedInput">
+  <button>Submit</button>
+</form>
+
+<div class="dogBreedImg"></div>
 
 
-
-
- <script src="http://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+<script src="jquery-3.4.1.min.js"></script>
  <script src='index.js'></script>   
 </body>
 </html>

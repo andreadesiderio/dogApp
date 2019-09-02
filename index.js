@@ -1,12 +1,12 @@
 'use strict'
 
-function showDogImgs(val){
+function retrieveDogImgs(val){
    fetch(`https://dog.ceo/api/breeds/image/random/${val}`)
    .then(response => response.json())
-   .then(responseJson => showResponse(responseJson)); 
+   .then(responseJson => showImgs(responseJson)); 
 }
 
-function showResponse(responseJson){
+function showImgs(responseJson){
     let imgArr = responseJson.message;
     for (let i = 0 ; i < imgArr.length; i ++){
         let img = imgArr[i];
@@ -15,18 +15,42 @@ function showResponse(responseJson){
     }
 }
 
-function handleFormSubmition(){
-$('form').on('submit', function(event){
-    event.preventDefault();
-    let val = $('input').val();
-    showDogImgs(val);
-    $('form').off('submit'); 
-    $('form')[0].reset(); 
+function handleMultipleImgsForm(){
+    $('#multipleImgs').on('submit', function(event){
+     event.preventDefault();
+     let val = $('input').val();
+     $('.imagesContainer').empty();
+     retrieveDogImgs(val); 
 })
 }
 
+function retrieveBreed(breed){
+   fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
+   .then(response => response.json())
+   .then(responseJson => showBreedImg(responseJson))
+   .catch(error => showErrorMessage(error))
+}
+
+function showErrorMessage(error){
+    $('.dogBreedImg').html(`<h2>Error Meassage:</h2><p>${error.message}</p>`);
+}
+
+function showBreedImg(responseJson){
+let breed = responseJson.message;
+console.log();
+$('.dogBreedImg').html(`<img src='${breed}' alt='${breed}'>`);
+}
+
+function handleSingleImgForm(){
+  $('#singleImg').on('submit', function(event){
+     event.preventDefault();
+     let breed = $('#breedInput').val();
+     retrieveBreed(breed);
+    })  
+}
 
 
 $(function handlePageLoad(){
-    handleFormSubmition();
+    handleMultipleImgsForm();
+    handleSingleImgForm();
 })
