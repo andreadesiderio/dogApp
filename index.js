@@ -20,6 +20,8 @@ $('form').on('submit', function(event){
     event.preventDefault();
     let val = $('input').val();
     showDogImgs(val);
+    $('form').off('submit'); 
+    $('form')[0].reset(); 
 })
 }
 
